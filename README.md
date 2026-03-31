@@ -51,6 +51,7 @@ npx playwright install
 Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 ```env
 BASE_URL=https://blog.agibank.com.br/
+HOME_PATH=/
 TEXTO_PADRAO="Qual taxa de juros ?"
 TEXTO_INVALIDO=asdasdasdasd
 BOTAO_LUPA="a.slide-search.astra-search-icon"
