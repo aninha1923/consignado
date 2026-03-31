@@ -9,7 +9,7 @@ Este projeto contém a automação de testes de aceitação para o Blog do Agiba
 *   **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
 *   **Framework de Testes:** [Playwright](https://playwright.dev/)
 *   **Relatórios:** [Allure Report](https://allurereport.org/)
-*   **CI/CD:** [Azure Pipelines](https://azure.microsoft.com/pt-br/products/devops/pipelines/)
+*   **CI:** [GitHub Actions](https://docs.github.com/pt/actions)
 *   **Gerenciamento de Variáveis:** [Dotenv](https://www.npmjs.com/package/dotenv)
 
 ---
