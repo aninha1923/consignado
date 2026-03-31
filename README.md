@@ -24,8 +24,10 @@ Este projeto contém a automação de testes de aceitação para o Blog do Agiba
 │       └── constants/
 │           ├── Config.ts           # Classe de configuração (ponte para o .env)
 │           └── blogAgibank.constants.ts # Mapeamento de seletores e URLs
+├── .github/
+│   └── workflows/
+│       └── playwright.yml          # Pipeline do GitHub Actions
 ├── playwright.config.ts            # Configurações globais do Playwright
-├── azure-pipelines.yml             # Pipeline principal do Azure DevOps
 ├── .env                            # Arquivo de variáveis de ambiente (local)
 └── package.json                    # Dependências e scripts do projeto
 ```
@@ -83,13 +85,38 @@ npm run allure:open
 
 ---
 
-## ⚙️ CI/CD (Azure Pipelines)
+## ⚙️ CI/CD (GitHub Actions)
 
-O projeto está configurado para rodar automaticamente no Azure DevOps. O pipeline executa as seguintes etapas:
-1.  **Setup de Ambiente:** Instalação de Node.js, NPM e Java (necessário para o Allure).
-2.  **Configuração de Variáveis:** Gera o arquivo `.env` dinamicamente a partir das variáveis cadastradas no Azure.
-3.  **Execução:** Roda os testes usando o container oficial do Playwright (`mcr.microsoft.com/playwright`).
-4.  **Publicação:** Gera o relatório Allure e o disponibiliza como um artefato da build para consulta.
+O projeto está configurado para executar os testes automaticamente no GitHub Actions sempre que há push ou pull request nas branches `main` ou `master`.
+
+### 🔧 Configuração Necessária
+
+Antes de rodar a pipeline, configure as **Secrets** no GitHub:
+
+1. Acesse **Settings** → **Secrets and variables** → **Actions**
+2. Crie as seguintes secrets:
+
+| Secret | Valor |
+|--------|-------|
+| `BASE_URL` | `https://blog.agibank.com.br/` |
+| `HOME_PATH` | `/` |
+| `TEXTO_PADRAO` | `Qual taxa de juros ?` |
+| `TEXTO_INVALIDO` | `asdasdasdasd` |
+| `BOTAO_LUPA` | `a.slide-search.astra-search-icon` |
+| `INPUT_BUSCA` | `input[type="search"]` |
+| `MENU_BUSCA` | `.ast-search-menu-icon.slide-search` |
+
+### 📋 O que a Pipeline Faz
+
+1. **Setup:** Instala Node.js (versão LTS) e as dependências
+2. **Browsers:** Instala os navegadores do Playwright
+3. **Configuração:** Cria automaticamente o arquivo `.env` com os valores das secrets
+4. **Testes:** Executa todos os testes com `npx playwright test`
+5. **Relatórios:** Faz upload do relatório para os artefatos da build
+
+### ✅ Acompanhamento
+
+Para acompanhar a execução, vá até a aba **Actions** do seu repositório e veja os logs em tempo real.
 
 ---
 
