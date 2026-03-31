@@ -17,6 +17,15 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Create .env file
+      run: |
+        echo "BASE_URL=${{ secrets.BASE_URL }}" > .env
+        echo "HOME_PATH=${{ secrets.HOME_PATH }}" >> .env
+        echo "TEXTO_PADRAO=${{ secrets.TEXTO_PADRAO }}" >> .env
+        echo "TEXTO_INVALIDO=${{ secrets.TEXTO_INVALIDO }}" >> .env
+        echo "BOTAO_LUPA=${{ secrets.BOTAO_LUPA }}" >> .env
+        echo "INPUT_BUSCA=${{ secrets.INPUT_BUSCA }}" >> .env
+        echo "MENU_BUSCA=${{ secrets.MENU_BUSCA }}" >> .env
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
